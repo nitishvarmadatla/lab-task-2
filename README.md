@@ -1,48 +1,59 @@
-Project Overview
-This project involves a detailed Exploratory Data Analysis (EDA) and Machine Learning Classification study on the Netflix content catalog. The primary objective is to move beyond anecdotal understanding to provide data-driven recommendations for optimizing content strategy, driving subscriber growth, and enhancing retention.
+# 🎬 Netflix Content Clustering & Strategic Analysis (EDA Capstone)
 
-Problem Statement & Business Objective
-Category	Description
-Problem Statement	To analyze the vast Netflix content catalog to identify key trends, geographical gaps, and characteristic differences between content types. This quantifiable understanding will inform the content acquisition and original production strategy.
-Business Objective	To maximize subscriber growth and minimize churn by developing a strategic, data-informed content investment plan. This plan focuses on prioritizing content types, genres, and geographic origins that best align with global audience demand.
+## Project Overview
 
-Export to Sheets
-💾 Dataset & Methodology
-Data Source
-The dataset used is the Netflix Movies and TV Shows Dataset (sourced from Kaggle), covering content available on the platform as of 2021.
+This project is an **Exploratory Data Analysis (EDA)** focused on preparing and analyzing the **Netflix Content Catalog (Clustering Dataset)**. The primary goal is to identify and characterize natural groupings (**clusters**) within the content library based on features like genre, duration, country, and rating. The insights derived are used to inform a data-driven content strategy.
 
-Data Wrangling & Feature Engineering
-Data preparation was crucial due to significant missing values. Key steps included:
+## Problem Statement & Business Objective
 
-Missing Data Imputation: Handled missing data in highly sparse columns like director (approx. 30% missing), cast, and country by using the placeholder 'Unknown' to preserve data integrity.
+| Category | Description |
+| :--- | :--- |
+| **Problem Statement** | To analyze the 7,787 titles in the Netflix catalog to identify and define **natural clusters and segments** of content. This classification is essential for targeted content acquisition, marketing to specific user segments, and reducing churn. |
+| **Business Objective** | To **optimize content acquisition and marketing efficiency** by leveraging EDA and clustering to group titles into distinct, actionable segments. This enables the client to identify market saturation points and under-represented content types. |
 
-Feature Creation: Engineered new analytic features: year_added, main_country (primary country of origin), and standardized duration metrics (duration_int and duration_type).
+---
 
-Exploratory Data Analysis (EDA)
-The analysis was structured using the UBM Rule (Univariate, Bivariate, and Multivariate Analysis) and included over 20 visualizations to reveal trends:
+## 💾 Dataset & Methodology
 
-Content Composition: Analyzing the Movies vs. TV Shows distribution.
+### Data Source
+The data used is the **Netflix Movies and TV Shows CLUSTERING Dataset** (7,787 entries), a previous snapshot of the platform's content catalog.
 
-Temporal Trends: Charting the acceleration of content acquisition and historical release year trends.
+### Data Wrangling & Feature Engineering
+Data preparation was crucial, specifically for clustering models which require purely numerical inputs:
 
-Geographical Focus: Identifying the dominant content production regions and areas lacking representation.
+1.  **Missing Data Imputation:** Handled significant missing data in **`director`** (2,389 values) and **`country`** by using the placeholder **'Unknown'** to preserve data integrity.
+2.  **Feature Standardization:** The non-numeric `type` and `duration` fields were standardized:
+    * **`is_movie`** (Binary: 1/0)
+    * **`duration_int`** (Numerical value of minutes/seasons)
+    * **`main_country`** (Primary country extracted)
+    * **`primary_genre`** (First genre extracted for modeling simplicity)
 
-Machine Learning Model
-A Logistic Regression model was built and evaluated for a Binary Classification task, predicting the content type (Movie or TV Show) based on derived characteristics (e.g., country, duration, rating).
+### Key EDA Findings
 
-💡 Key Findings
-Content Mix Dominance: The catalog is heavily skewed toward Movies (approximately 70%), confirming that historical investment favored feature films over long-form series.
+| Finding | Insight | Risk/Opportunity |
+| :--- | :--- | :--- |
+| **Content Mix** | Catalog is **68.7% Movies** vs. 31.3% TV Shows. | **Risk:** High churn among TV series enthusiasts. |
+| **Acquisition Trend** | Exponential growth peaked in **2019-2020**. | **Opportunity:** Shift from volume to quality and strategic gap filling. |
+| **Geographical Imbalance** | **United States** is overwhelmingly dominant. | **Risk:** Creates a **'localization gap'** in global markets. |
+| **Metadata Quality** | Growing trend of acquisitions with **'Unknown' country** origins. | **Risk:** Inefficient content spending and poor regional targeting. |
 
-Acquisition Acceleration: Content acquisition showed a massive, exponential growth starting around 2016, indicating a strategic push to rapidly scale the library.
+---
 
-Geographical Imbalance: Content is overwhelmingly dominated by the United States, highlighting a potential 'localization gap' in catering to high-growth international markets.
+## 💡 Machine Learning & Conclusion
 
-Rating Concentration: The majority of content falls into mature audience ratings (TV-MA and TV-14).
+The project prepared data for a clustering model using features like `duration_int`, `year_added`, `main_country`, and encoded genre types. The EDA confirmed that the **`duration_int`** feature is the most predictive single variable, clearly separating Movies (high minutes) from TV Shows (low seasons).
 
-⚙️ Technical Stack
-Language: Python
+### Final Recommendations
 
-Environment: Google Colab / Jupyter Notebook
+1.  **Strategic TV Investment:** Prioritize the acquisition/production of **multi-season TV series** to address the 'completion fatigue' risk and balance the content mix.
+2.  **Geographic Diversification:** Allocate resources specifically to **under-represented markets** (e.g., Latin America, Germany) to close the 'localization gap'.
+3.  **Mandate Metadata Quality:** Implement stricter content ingestion controls to eliminate the acquisition of titles with 'Unknown' origins, ensuring all spending is trackable and targetable.
 
-Core Libraries: pandas, numpy, matplotlib, seaborn, scikit-learn (for modeling and preprocessing)
+## ⚙️ Technical Stack
 
+* **Language:** Python
+* **Environment:** Google Colab / Jupyter Notebook
+* **Core Libraries:** `pandas`, `numpy`, `matplotlib`, `seaborn`, `scikit-learn`
+
+---
+*Created by: \[Your Name]*
